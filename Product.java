@@ -40,7 +40,7 @@ public class Product {
 	  return productID + "," + productName + "," + manufacturerName + "," + supplierName + "," + quantity + "," + price;
   }
   public String getSearchKey() {
-	  return "P" + Long.toString(System.currentTimeMillis()/10000);
+	  return "P" + Long.toString(System.currentTimeMillis()%10000);
   }
    public void storeInFile() {
 	   try {FileWriter writeFile = new FileWriter(new File("Product.txt"),true);

@@ -51,7 +51,7 @@ public class CustomerProduct {
 	   }
    }
    public String generateID() {
-	   return "P" + Long.toString(System.currentTimeMillis()/10000);
+	   return "P" + Long.toString(System.currentTimeMillis()%10000);
 	   
    }
    

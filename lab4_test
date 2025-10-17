@@ -1,0 +1,20 @@
+package com.example;
+public class Lab4_test {
+    public static void main(String[] args) {
+        EmployeeUserDatabase eDb = new EmployeeUserDatabase("/Users/amlegomaa/Data/uni/Untitled.txt");
+        eDb.readFromFile();
+        System.out.println(eDb.contains("E200"));
+        //EmployeeUser e = eDb.createRecordFrom("E3000,a,a@gamil.com,alex,12345678901");
+        //eDb.insertRecord(e);
+        //eDb.saveToFile();
+        //eDb.deleteRecord("E200");
+        //eDb.saveToFile();
+        //System.out.println(e.lineRepresentation());
+        //eDb.createRecordFrom("E3000,a,a@gamil.com,alex,12345678901");
+        //eDb.saveToFile();
+        /*EmployeeUser e = new EmployeeUser("E1200", "amle", "a@gamil.com", "alex", "123456");
+        System.out.println(e.lineRepresentation()); 
+        System.out.println(e.getSearchKey());*/
+    }
+
+}
