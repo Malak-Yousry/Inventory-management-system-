@@ -2,8 +2,8 @@ package com.example;
 public class Lab4_test {
     public static void main(String[] args) {
         EmployeeUserDatabase eDb = new EmployeeUserDatabase("/Users/amlegomaa/Data/uni/Untitled.txt");
-        eDb.readFromFile();
-        System.out.println(eDb.contains("E200"));
+        //eDb.readFromFile();
+        //System.out.println(eDb.contains("E200"));
         //EmployeeUser e = eDb.createRecordFrom("E3000,a,a@gamil.com,alex,12345678901");
         //eDb.insertRecord(e);
         //eDb.saveToFile();
@@ -15,6 +15,18 @@ public class Lab4_test {
         /*EmployeeUser e = new EmployeeUser("E1200", "amle", "a@gamil.com", "alex", "123456");
         System.out.println(e.lineRepresentation()); 
         System.out.println(e.getSearchKey());*/
+
+        //ProductDatabase pDb = new ProductDatabase("/Users/amlegomaa/Data/uni/Products.txt");
+        //pDb.readFromFile();
+        //productID, productName, manufacturerName, supplierName,quantity, price
+        //Product p = pDb.createRecordFrom("P4000,ipad,apple,Asupplier,10,6000");
+        //System.out.println(p.lineRepresentation());
+        //System.out.println(pDb.contains("P239"));
+        //p = pDb.getRecord("P2394");
+        //System.out.println(p.lineRepresentation());
+        //pDb.insertRecord(p);
+        //pDb.deleteRecord("P2000");
+        //pDb.saveToFile();
     }
 
 }
