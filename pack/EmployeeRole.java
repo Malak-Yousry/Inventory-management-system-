@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class EmployeeRole {
 	// attributes
-	private ProductDataBase productsDatabase;
-	private CustomerDataBase customerDatabase;
+	private ProductDatabase productsDatabase;
+	private CustomerProductDatabase customerProductDatabase;
 	
 	// constructor
 	public EmployeeRole() {
@@ -17,22 +17,22 @@ public class EmployeeRole {
 	
 	// methods
 	public void addProduct(String productID, String productName ,String manufacturerName , String supplierName , int quantity) {
-		Product product =productsDatabase.getrecord(productID);
+		Product product =productsDatabase.getRecord(productID);
 		float price;
 		if(product!=null) {
 		price = product.getPrice();
-		Product newProduct=new Product(productID,productName,manufacturerName,supllierName,quantity,price);
+		Product newProduct=new Product(productID,productName,manufacturerName,supplierName,quantity,price);
 		productsDatabase.insertRecord(newProduct);
 			productsDatabase.saveToFile();
 	}
 }
 	public Product[] getListOfProducts() {
-		ArrayList<Product> list = productDatabase.returnAllRecords();
+		ArrayList<Product> list = productsDatabase.returnAllRecords();
 		return list.toArray(new Product[list.size()]);
 	}
 
 	public CustomerProduct[] getListOfPurchasingOperations() {
-	ArrayList<CustomerProduct> list = customerDatabase.returnAllRecords();
+	ArrayList<CustomerProduct> list = customerProductDatabase.returnAllRecords();
 		return list.toArray(new CustomerProduct[list.size()]);
 	}
 	
@@ -40,18 +40,18 @@ public class EmployeeRole {
 			productID, LocalDate purchaseDate) {
 		Product[] products= getListOfProducts();
 		for(int i=0;i<products.length;i++) {
-			if(products[i].productID.equals(productID)) {
-				if(products[i].quantity==0){
+			if(products[i].getSearchKey().equals(productID)) {
+				if(products[i].getQuantity()==0){
 					return false;}
 			}
 			
 				products[i].setQuantity(products[i].getQuantity()-1);
-				CustomerProduct new = new CustomerProduct(customerSSN,productID,purchaseDate,false);
-				customerProductDatabase.insertRecord(new);
+				CustomerProduct newProduct = new CustomerProduct(customerSSN,productID,purchaseDate);
+				customerProductDatabase.insertRecord(newProduct);
 				customerProductDatabase.saveToFile();
 
-				productDatabase.deleteRecord(productID);
-				productDatabase.insertRecord(products[i]);
+				productsDatabase.deleteRecord(productID);
+				productsDatabase.insertRecord(products[i]);
 				productsDatabase.saveToFile();
 				return true;
 			
@@ -65,43 +65,47 @@ public class EmployeeRole {
 		else if(returnDate.isAfter(purchaseDate.plusDays(14)))return -1.0;
 			 DateTimeFormatter formater=DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			 String key=customerSSN + "," + productID + "," +purchaseDate.format(formater);
-		else if (!customerProductDatabase.contains(key)) return -1.0;
+		if (!customerProductDatabase.contains(key)) return -1.0;
 
 			Product[] products= getListOfProducts();
 			Product flag=null;
 		for(int i=0;i<products.length;i++) {
-			if(products[i].getProductID.equals(productID)) {
+			if(products[i].getSearchKey().equals(productID)) {
 				flag=products[i];
 				break;
 			}
 		}
 		if (flag==null)return -1.0;
 
-		flag.setQuantity()=flag.getQuantity()+1;
+		flag.setQuantity(flag.getQuantity()+1);
 			customerProductDatabase.deleteRecord(key);
-			customerProductsDatabase.saveToFile();
-		    productDatabase.deleteRecord(productID);
-			productDatabase.insertRecord(flag);
+			customerProductDatabase.saveToFile();
+		    productsDatabase.deleteRecord(productID);
+			productsDatabase.insertRecord(flag);
 			productsDatabase.saveToFile();
 				return flag.getPrice();
 			
 		}	
-	public boolean applyPayment(String customerSSN, LocalDate 
+	public boolean applyPayment(String customerSSN, LocalDate  
 purchaseDate){
 	 DateTimeFormatter formater=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	String key=customerSSN + "," + productID + "," +purchaseDate.format(formater)+","+false;
-	CustomerProduct customer=customerProductDatabase.getrecord(customerSSN + "," + customer.getProductID() + "," +purchaseDate.format(formater)+","+false;);
-	String key=customerSSN + "," + customer.getProductID()+ "," +purchaseDate.format(formater)+","+false;
+	 	String key=customerSSN  + "," +purchaseDate.format(formater)+","+false;
+    CustomerProduct customer =customerProductDatabase.getRecord(key);
+
+if(customer == null){
+	return false;
+}
 	
-	if(customer.isPaid)return false;
+	if(customer.isPaid())
+	      return false;
 	customerProductDatabase.deleteRecord(key);
-	customerProductDatabase.insertRecord(new CustomerProduct(customerSSN,customer.getProductID() ,purchaseDate,true));
-	customerProductsDatabase.saveToFile();
+	customerProductDatabase.insertRecord(new CustomerProduct(customer.getCustomerSSN(),customer.getProductID() ,purchaseDate));
+	customerProductDatabase.saveToFile();
 	return true;
 }
 public void logout(){
 	productsDatabase.saveToFile();
-	customerDatabase.saveToFile();
+	customerProductDatabase.saveToFile();
 }
 
 
