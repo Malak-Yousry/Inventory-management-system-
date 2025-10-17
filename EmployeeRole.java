@@ -1,4 +1,4 @@
-package p1;
+package pack;
 
 import java.io.*;
 import java.time.LocalDate;
