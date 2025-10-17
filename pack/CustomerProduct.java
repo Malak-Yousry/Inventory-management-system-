@@ -39,7 +39,7 @@ public class CustomerProduct {
    }
    public String getSearchKey() {
 	   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		  return CustomerSSN + "," + generateID() + "," + purchaseDate.format(formatter);
+		  return CustomerSSN + "," + productID + "," + purchaseDate.format(formatter);
 	  }
    public void storeInFile() {
 	   try {FileWriter writeFile = new FileWriter(new File("CustomersProduct.txt"),true);
@@ -50,9 +50,9 @@ public class CustomerProduct {
 		   e.printStackTrace();
 	   }
    }
-   public String generateID() {
+   /*public String generateID() {
 	   return "P" + Long.toString(System.currentTimeMillis()%10000);
 	   
-   }
+   }*/
    
 }
