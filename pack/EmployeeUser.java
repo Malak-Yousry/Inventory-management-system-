@@ -16,5 +16,8 @@ public class EmployeeUser {
     public String lineRepresentation(){
         return employeeID + "," + name + "," + email + "," + address + "," + phoneNumber;
     }
-
+   public String getSearchKey() {
+    return employeeID;
+       
+   }
 }
