@@ -15,6 +15,9 @@ public class CustomerProductDatabase {
 		this.filename = filename;
 		this.records=new ArrayList<>();
 	}
+
+    public CustomerProductDatabase() {
+    }
 	// methods
 	 public void readFromFile() {
 		 DateTimeFormatter formater=DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -31,7 +34,7 @@ public class CustomerProductDatabase {
 				LocalDate purchaseDate=LocalDate.parse(parts[j++],formater);
 				boolean paid=Boolean.parseBoolean(parts[j++]);
 				
-				CustomerProduct record=new CustomerProduct(customerSSN,productID,purchaseDate,paid);
+				CustomerProduct record=new CustomerProduct(customerSSN,productID,purchaseDate);
 	            records.add(record);
 				}}
 			catch(FileNotFoundException e) {
