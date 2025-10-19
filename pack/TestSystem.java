@@ -11,6 +11,7 @@ public class TestSystem{
     System.out.print("Your Choice[Yes or NO]: ");
     String operation = Scan.next();
 
+//A loop that ends when the user wants to close the system
     while(operation.equalsIgnoreCase("Yes")){
      menu1();
      System.out.println("Do you want another operation??");
@@ -20,12 +21,15 @@ public class TestSystem{
     System.out.println("Thank You!!");
     System.exit(0);
   }
+  //A fuction that generates a new EmployeeID
 public static String generateNewEmployeeID(){
     return "E" + Long.toString(System.currentTimeMillis()%10000);
  }
+   //A fuction that generates a new ProductID
  public static String generateNewProductID(){
     return "P" + Long.toString(System.currentTimeMillis()%10000);
  }
+   //A fuction that generates a new CustomerSSN
  public static String generateCustomerSSN(){
     return Long.toString(System.currentTimeMillis());
  }
@@ -77,6 +81,7 @@ public static void menu2(int choice){
             System.out.print("Enter Employee E-mail: ");
             String email = Scan.next();
               int k = 1;
+              //checks that the email formate is correct
             while(!email.contains("@gmail.com") && !email.contains("@yahoo.com")){
                 if(k<3){
                     System.out.println("Incorrect E-mail Format!!");
@@ -95,6 +100,7 @@ public static void menu2(int choice){
             System.out.print("Enter Employee Phone Number: ");
              String phoneNumber = Scan.next();
              int i = 1;
+             //checks that the phone number formate is correct
                 while(phoneNumber.length()!=11){
                     if(i<3){
                     System.out.println("Incorrect Phone Number!! (NOT 11 DIGITS)");
@@ -126,6 +132,7 @@ public static void menu2(int choice){
              break;
            }   
     case 4: {
+        System.out.println(".....Logging Out.....");
         admin.logout();
         break;
     }
@@ -201,6 +208,7 @@ public static void menu2(int choice){
                  break;
             }   
         case 4: {
+            System.out.println(".....Logging Out.....");
         employee.logout();
         break;
          } 
