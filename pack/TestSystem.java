@@ -1,6 +1,7 @@
 package pack;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class TestSystem{
     public static void main(String[] args) {
@@ -24,6 +25,9 @@ public static String generateNewEmployeeID(){
  }
  public static String generateNewProductID(){
     return "P" + Long.toString(System.currentTimeMillis()%10000);
+ }
+ public static String generateCustomerSSN(){
+    return Long.toString(System.currentTimeMillis());
  }
 public static void menu1(){ 
     Scanner Scan = new Scanner(System.in);
@@ -142,8 +146,6 @@ public static void menu2(int choice){
                  System.out.println(".....Adding Product.....");
                  System.out.print("Enter Product Name: ");
                  String productName = Scan.next();
-                 //System.out.print("Enter ProductID: ");
-                 //String productID = Scan.next();
                  System.out.print("Enter Manufacturer Name: ");
                  String manufacturerName = Scan.next();
                  System.out.print("Enter Supplier Name: ");
@@ -152,38 +154,40 @@ public static void menu2(int choice){
                  int quantity = Scan.nextInt();
                  System.out.print("Enter the Price: ");
                  float price = Scan.nextFloat();
-            
-                 employee.addProduct(generateNewProductID(), productName, manufacturerName, supplierName, quantity);
+                 String productID = generateNewProductID();
+                 employee.addProduct(productID, productName, manufacturerName, supplierName, quantity);
+                 employee.updatePrice(productID,price);
                  break;
             }
         case 2:
             {
                  System.out.println(".....Purchasing Product.....");
-                 System.out.println("Enter CustomerSSN: ");
-                 String customerSSN = Scan.next();
+                 String customerSSN = generateCustomerSSN();
                  System.out.print("Enter ProductID: ");
                  String productID = Scan.next();
                  LocalDate  today = LocalDate.now();
-                System.out.println("Do You Want To Pay now??");
+                if(employee.purchaseProduct(customerSSN, productID, today)){
+                  System.out.println("Do You Want To Pay now??");
                     System.out.print("Yes or No: ");
                     String payement = Scan.next();
                  if(payement.equalsIgnoreCase("Yes"))
                      employee.applyPayment(customerSSN, today);
-                employee.purchaseProduct(customerSSN, productID, today);
-
+                
+            }
                 
                  break; 
             }    
         case 3:
             {
                  System.out.println(".....Removing Product.....");
-                 System.out.println("Enter CustomerSSN");
+                 System.out.println("Enter CustomerSSN: ");
                  String customerSSN = Scan.next();
                  System.out.print("Enter ProductID: ");
                  String productID = Scan.next();
-                 System.out.print("Enter Purchase Date[yyy-MM-dd]: ");
+                 System.out.print("Enter Purchase Date[dd-MM-yyyy]: ");
                  String purchase = Scan.next();
-                 LocalDate purchaseDate = LocalDate.parse(purchase);
+                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                 LocalDate purchaseDate = LocalDate.parse(purchase,formatter);
                  LocalDate  today = LocalDate.now();
 
                  double price = employee.returnProduct(customerSSN,productID,purchaseDate,today);
