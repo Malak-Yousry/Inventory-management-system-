@@ -3,7 +3,7 @@ package pack;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-public class EmployeeRole {
+public class EmployeeRole implements Logout{
 	// attributes
 	private ProductDatabase productsDatabase;
 	private CustomerProductDatabase customerProductDatabase;
