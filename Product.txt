@@ -1,3 +1,4 @@
-P2394,Laptop,Apple,TechSupplier,10,1500
-P9954,Phone,Apple,B-tech,5,900
-P7521,Speakers,GBL,2-B,15,500
+P2394,Laptop,Apple,TechSupplier,10,1500.0
+P9954,Phone,Apple,B-tech,5,900.0
+P9547,dajjgjsg,mdslghkjsr,kbgkhzsg,2,7.0
+P7521,Speakers,GBL,2-B,17,500.0
