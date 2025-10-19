@@ -21,17 +21,19 @@ public class TestSystem{
     System.out.println("Thank You!!");
     System.exit(0);
   }
-  //A fuction that generates a new EmployeeID
+  //A fuction that generates a new EmployeeID and ensures that the ID is a letter and 4 digits
 public static String generateNewEmployeeID(){
-    return "E" + Long.toString(System.currentTimeMillis()%10000);
+    return "E" + String.format("%04d",(System.currentTimeMillis()%10000));
  }
    //A fuction that generates a new ProductID
  public static String generateNewProductID(){
-    return "P" + Long.toString(System.currentTimeMillis()%10000);
+    return "P" + String.format("%04d",(System.currentTimeMillis()%10000));
  }
    //A fuction that generates a new CustomerSSN
+   //Casting to be long
+   //zero at the beging to ensure that the 10 spaces are filled with digits
  public static String generateCustomerSSN(){
-    return Long.toString(System.currentTimeMillis());
+    return  String.format("%010d",System.currentTimeMillis()%10000000000l);
  }
 public static void menu1(){ 
     Scanner Scan = new Scanner(System.in);
