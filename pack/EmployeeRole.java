@@ -38,9 +38,17 @@ public class EmployeeRole {
 	ArrayList<CustomerProduct> list = customerProductDatabase.returnAllRecords();
 		return list.toArray(new CustomerProduct[list.size()]);
 	}
-	
-	public boolean purchaseProduct(String customerSSN, String 
-			productID, LocalDate purchaseDate) {
+	public void updatePrice(String productID,float price){
+	Product product =productsDatabase.getRecord(productID);
+	if(product!=null){
+		product.setPrice(price);
+		productsDatabase.deleteRecord(productID);
+		productsDatabase.insertRecord(product);
+		productsDatabase.saveToFile();
+
+	}
+	}
+	public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
 		Product[] products= getListOfProducts();
 		for(int i=0;i<products.length;i++) {
 			if(products[i].getSearchKey().equals(productID)) {
@@ -93,28 +101,26 @@ public class EmployeeRole {
 				return flag.getPrice();
 			
 		}	
-	public boolean applyPayment(String customerSSN, LocalDate  
-purchaseDate){
-	 DateTimeFormatter formater=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 	String key=customerSSN  + "," +purchaseDate.format(formater);
-    CustomerProduct customer =customerProductDatabase.getRecord(key);
+	public boolean applyPayment(String customerSSN, LocalDate purchaseDate){
+DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-if(customer == null){
-	return false;
-}
-	if(customer.isPaid()){
-	      return false;}
-	customer.setPaid(true);
-	customerProductDatabase.insertRecord(customer);
-
-	customerProductDatabase.saveToFile();
-	return true;
-}
+CustomerProduct[] cP = this.getListOfPurchasingOperations();     
+for(int i = 0; i < cP.length; i++){          
+	  if((cP[i].getCustomerSSN().equals(customerSSN) && cP[i].getPurchaseDate().equals(purchaseDate)) && !(cP[i].isPaid())){
+		cP[i].setPaid(true);
+String key = cP[i].getCustomerSSN() + "," + cP[i].getProductID() + "," + (cP[i].getPurchaseDate()).format(formater);             
+   customerProductDatabase.deleteRecord(key);                               
+customerProductDatabase.insertRecord(cP[i]);
+ customerProductDatabase.saveToFile();               
+  return true;      
+        }      
+		  }      
+ return false;
+			}
 public void logout(){
 	productsDatabase.saveToFile();
 	customerProductDatabase.saveToFile();
 }
-
 
 
 }
