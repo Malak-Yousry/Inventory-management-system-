@@ -1,10 +1,8 @@
 package pack;
 
-import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 public class EmployeeRole {
 	// attributes
 	private ProductDatabase productsDatabase;
@@ -12,14 +10,16 @@ public class EmployeeRole {
 	
 	// constructor
 	public EmployeeRole() {
-		
+		productsDatabase = new ProductDatabase("Product.txt");
+		productsDatabase.readFromFile();
 	}
 	
 	// methods
 	public void addProduct(String productID, String productName ,String manufacturerName , String supplierName , int quantity) {
 		Product product =productsDatabase.getRecord(productID);
-		float price;
-		if(product!=null) {
+		
+		if(product==null) {
+		float price=0.0f;
 		price = product.getPrice();
 		Product newProduct=new Product(productID,productName,manufacturerName,supplierName,quantity,price);
 		productsDatabase.insertRecord(newProduct);
