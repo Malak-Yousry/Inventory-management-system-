@@ -16,6 +16,7 @@ public class CustomerProduct implements Record{
 	CustomerSSN = customerSSN;
 	this.productID = productID;
 	this.purchaseDate = purchaseDate;
+	this.paid = false;
    }
    public String getCustomerSSN() {
 	return CustomerSSN;
