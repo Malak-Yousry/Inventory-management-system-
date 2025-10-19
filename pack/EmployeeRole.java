@@ -22,11 +22,12 @@ public class EmployeeRole {
 		
 		if(product==null) {
 		float price=0.0f;
-		price = product.getPrice();
 		Product newProduct=new Product(productID,productName,manufacturerName,supplierName,quantity,price);
 		productsDatabase.insertRecord(newProduct);
 			productsDatabase.saveToFile();
 	}
+	else 
+	System.out.println("Product Found!!");
 }
 	public Product[] getListOfProducts() {
 		ArrayList<Product> list = productsDatabase.returnAllRecords();
@@ -47,17 +48,18 @@ public class EmployeeRole {
 					System.out.println("Quantity equals to zero!");
 					return false;}
 
-			}
+			
 			
 				products[i].setQuantity(products[i].getQuantity()-1);
 				CustomerProduct newProduct = new CustomerProduct(customerSSN,productID,purchaseDate);
 				customerProductDatabase.insertRecord(newProduct);
 				customerProductDatabase.saveToFile();
-
 				productsDatabase.deleteRecord(productID);
 				productsDatabase.insertRecord(products[i]);
 				productsDatabase.saveToFile();
+                System.out.println("Purchase Done Successfully!!");
 				return true;
+			}
 			
 		}
 		System.out.println("Product not found");
@@ -100,10 +102,11 @@ purchaseDate){
 if(customer == null){
 	return false;
 }
-	
-	if(customer.isPaid())
-	      return false;
+	if(customer.isPaid()){
+	      return false;}
 	customer.setPaid(true);
+	customerProductDatabase.insertRecord(customer);
+
 	customerProductDatabase.saveToFile();
 	return true;
 }
