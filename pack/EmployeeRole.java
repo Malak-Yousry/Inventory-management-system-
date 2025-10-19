@@ -11,7 +11,9 @@ public class EmployeeRole {
 	// constructor
 	public EmployeeRole() {
 		productsDatabase = new ProductDatabase("Product.txt");
+		customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
 		productsDatabase.readFromFile();
+		customerProductDatabase.readFromFile();
 	}
 	
 	// methods
@@ -42,7 +44,9 @@ public class EmployeeRole {
 		for(int i=0;i<products.length;i++) {
 			if(products[i].getSearchKey().equals(productID)) {
 				if(products[i].getQuantity()==0){
+					System.out.println("Quantity equals to zero!");
 					return false;}
+
 			}
 			
 				products[i].setQuantity(products[i].getQuantity()-1);
@@ -56,6 +60,7 @@ public class EmployeeRole {
 				return true;
 			
 		}
+		System.out.println("Product not found");
 		return false;
 		
 	}
@@ -89,7 +94,7 @@ public class EmployeeRole {
 	public boolean applyPayment(String customerSSN, LocalDate  
 purchaseDate){
 	 DateTimeFormatter formater=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	 	String key=customerSSN  + "," +purchaseDate.format(formater)+","+false;
+	 	String key=customerSSN  + "," +purchaseDate.format(formater);
     CustomerProduct customer =customerProductDatabase.getRecord(key);
 
 if(customer == null){
@@ -98,8 +103,7 @@ if(customer == null){
 	
 	if(customer.isPaid())
 	      return false;
-	customerProductDatabase.deleteRecord(key);
-	customerProductDatabase.insertRecord(new CustomerProduct(customer.getCustomerSSN(),customer.getProductID() ,purchaseDate));
+	customer.setPaid(true);
 	customerProductDatabase.saveToFile();
 	return true;
 }
