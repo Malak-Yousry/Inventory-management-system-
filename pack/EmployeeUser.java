@@ -1,4 +1,5 @@
-public class EmployeeUser {
+package pack;
+public class EmployeeUser implements Record{
     private String employeeID;
     private String name;
     private String email;
