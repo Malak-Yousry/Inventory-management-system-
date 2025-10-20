@@ -1,4 +1,5 @@
 package pack;
+//Employee User class
 public class EmployeeUser implements Record{
     private String employeeID;
     private String name;

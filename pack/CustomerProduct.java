@@ -49,7 +49,7 @@ public class CustomerProduct implements Record{
 	   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		  return CustomerSSN + "," + productID + "," + purchaseDate.format(formatter);
 	  }
-	  //A method that stores information in a file
+	  //A method that stores information in file
    public void storeInFile() {
 	   try {FileWriter writeFile = new FileWriter(new File("CustomersProduct.txt"),true);
 	   writeFile.write(lineRepresentation() + "\n");

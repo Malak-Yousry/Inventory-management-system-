@@ -20,7 +20,7 @@ public class AdminRole implements Logout {
         else
         System.out.println("Employee already exists!");
     }
-
+//returns all list of employees in file
     public EmployeeUser[] getListOfEmployees() {
         ArrayList<EmployeeUser> list=database.returnAllRecords();
         return list.toArray(new EmployeeUser[list.size()]);

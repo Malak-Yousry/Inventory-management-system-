@@ -1,8 +1,8 @@
 package pack;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 public class CustomerProductDatabase extends Database<CustomerProduct>{
-	
 	
 	// constructor
 	public CustomerProductDatabase(String filename) {

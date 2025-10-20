@@ -4,7 +4,7 @@ import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//Applied OOP priciples
 public abstract class Database<T extends Record>{
     // attributes should be protected
     protected ArrayList<T> records;

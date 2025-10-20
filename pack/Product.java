@@ -2,7 +2,7 @@ package pack;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+// Products Class
 public class Product implements Record{
    //Attributes
    private String productID;

@@ -1,5 +1,5 @@
 package pack;
-
+//Applied OOP principles[inheritance]
 public class EmployeeUserDatabase extends Database<EmployeeUser> {
     EmployeeUserDatabase(String name){
         super(name);

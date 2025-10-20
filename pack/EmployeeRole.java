@@ -33,7 +33,7 @@ public class EmployeeRole implements Logout{
 		ArrayList<Product> list = productsDatabase.returnAllRecords();
 		return list.toArray(new Product[list.size()]);
 	}
-
+//Returns all list of purchases in file 
 	public CustomerProduct[] getListOfPurchasingOperations() {
 	ArrayList<CustomerProduct> list = customerProductDatabase.returnAllRecords();
 		return list.toArray(new CustomerProduct[list.size()]);
