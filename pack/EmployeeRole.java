@@ -103,19 +103,21 @@ public class EmployeeRole implements Logout{
 		}	
 	public boolean applyPayment(String customerSSN, LocalDate purchaseDate){
 DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+boolean update = false;
 
-CustomerProduct[] cP = this.getListOfPurchasingOperations();     
+CustomerProduct[] cP = this.getListOfPurchasingOperations();   
 for(int i = 0; i < cP.length; i++){          
 	  if((cP[i].getCustomerSSN().equals(customerSSN) && cP[i].getPurchaseDate().equals(purchaseDate)) && !(cP[i].isPaid())){
 		cP[i].setPaid(true);
 String key = cP[i].getCustomerSSN() + "," + cP[i].getProductID() + "," + (cP[i].getPurchaseDate()).format(formater);             
    customerProductDatabase.deleteRecord(key);                               
 customerProductDatabase.insertRecord(cP[i]);
- customerProductDatabase.saveToFile();               
-  return true;      
+update= true;               
         }      
-		  }      
- return false;
+		  } 
+		 if(update)
+		 customerProductDatabase.saveToFile();
+ return update;
 			}
 public void logout(){
 	productsDatabase.saveToFile();
