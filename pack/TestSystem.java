@@ -147,7 +147,7 @@ public static void menu2(int choice){
     Scanner Scan = new Scanner(System.in);
          System.out.println("Choose one of the following: ");
      System.out.println("1)Add Product.\n2)List Of Purchases.\n3)Purchase Product.\n4)Return Product.\n5)Log Out.");
-         System.out.print("Your Choice[1 or 2 or 3 or 4 or 5 or 6 or 7]: ");
+         System.out.print("Your Choice[1 or 2 or 3 or 4 or 5]: ");
             int choice = Scan.nextInt();
 
       switch(choice){

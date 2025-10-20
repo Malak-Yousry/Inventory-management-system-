@@ -1,9 +1,6 @@
 package pack;
-import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
 public class CustomerProductDatabase extends Database<CustomerProduct>{
 	
 	
@@ -22,6 +19,7 @@ public class CustomerProductDatabase extends Database<CustomerProduct>{
 			LocalDate purchaseDate=LocalDate.parse(parts[j++],formater);
 			boolean paid=Boolean.parseBoolean(parts[j++]);
 			CustomerProduct customer= new CustomerProduct(customerSSN,productID,purchaseDate);
+			customer.setPaid(paid);
 			return customer;
 	 }
 	 

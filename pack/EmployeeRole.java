@@ -93,7 +93,7 @@ public class EmployeeRole implements Logout {
         if (!customerProductDatabase.contains(key)) {
             return -1.0;
         }
-
+        
         Product[] products = getListOfProducts();
         Product flag = null;
         for (int i = 0; i < products.length; i++) {
@@ -102,9 +102,12 @@ public class EmployeeRole implements Logout {
                 break;
             }
         }
-        if (flag == null) {
-            return -1.0;
-        }
+        
+       
+       if(flag == null)
+       return -1.0;
+       if(!customerProductDatabase.getRecord(key).isPaid())
+       return -1;
 
         flag.setQuantity(flag.getQuantity() + 1);
         customerProductDatabase.deleteRecord(key);
