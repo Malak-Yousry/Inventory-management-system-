@@ -67,6 +67,7 @@ public static void menu2(int choice){
             System.out.println("Incorrect Choice!!");
     } 
  }
+ //Menu For AminRole
  public static void adminMenu(AdminRole admin){
     Scanner Scan = new Scanner(System.in);
      System.out.println("Choose one of the following: ");
