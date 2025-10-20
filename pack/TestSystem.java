@@ -1,7 +1,7 @@
 package pack;
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class TestSystem{
     public static void main(String[] args) {
@@ -145,7 +145,7 @@ public static void menu2(int choice){
  public static void employeeMenu(EmployeeRole employee){
     Scanner Scan = new Scanner(System.in);
          System.out.println("Choose one of the following: ");
-     System.out.println("1)Add Product.\n2)Products.\n3)List Of Purchases.\n4)Purchase Product.\n5)Returned Product.\n6)Applypayment.\n7)Log Out.");
+     System.out.println("1)Add Product.\n2)List Of Purchases.\n3)Purchase Product.\n4)Return Product.\n5)Log Out.");
          System.out.print("Your Choice[1 or 2 or 3 or 4 or 5 or 6 or 7]: ");
             int choice = Scan.nextInt();
 
@@ -171,17 +171,13 @@ public static void menu2(int choice){
             
         case 2:
             {
-              System.out.println(".....Products.....");
-              employee.getListOfProducts();
-              break;
-            }
-        case 3:
-            {
                System.out.println(".....List Of Purchases.....");
-               employee.getListOfPurchasingOperations();
+               for(CustomerProduct e : employee.getListOfPurchasingOperations())
+               System.out.println(e.lineRepresentation());
+
                break;
             }
-        case 4:
+        case 3:
             {
                  System.out.println(".....Purchasing Product.....");
                  String customerSSN = generateCustomerSSN();
@@ -200,9 +196,9 @@ public static void menu2(int choice){
                  break; 
             }   
 
-        case 5:
+        case 4:
             {
-                 System.out.println(".....Returned Product.....");
+                 System.out.println(".....Return Product.....");
                  System.out.println("Enter CustomerSSN: ");
                  String customerSSN = Scan.next();
                  System.out.print("Enter ProductID: ");
@@ -223,21 +219,7 @@ public static void menu2(int choice){
 
                  break;
             }   
-
-        case 6: 
-            {
-            System.out.println(".....Apply payment.....");
-                System.out.println("Enter CustomerSSN: ");
-                 String customerSSN = Scan.next();
-                 System.out.print("Enter Purchase Date[dd-MM-yyyy]: ");
-                 String purchase = Scan.next();
-                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                 LocalDate purchaseDate = LocalDate.parse(purchase,formatter);
-                 employee.applyPayment(customerSSN,purchaseDate);  
-                 break;
-            }
-        
-        case 7:
+        case 5:
             {
             System.out.println(".....Logging Out.....");
         employee.logout();

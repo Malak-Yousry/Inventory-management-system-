@@ -29,6 +29,7 @@ public class AdminRole implements Logout {
         if(database.contains(key)){
             database.deleteRecord(key);
             database.saveToFile();
+            System.out.println("Employee Removed Successfully!!");
         }
         else 
         System.out.println("Employee not found!");
